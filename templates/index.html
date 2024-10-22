@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Inscritos</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Inscritos</h1>
+
+    <a href="{{ url_for('registro') }}"><button>Nuevo</button></a>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Turno</th>
+                <th>Seminario</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if session.inscritos %}
+                {% for inscrito in session.inscritos %}
+                    <tr>
+                        <td>{{ inscrito.fecha }}</td>
+                        <td>{{ inscrito.nombre }}</td>
+                        <td>{{ inscrito.apellidos }}</td>
+                        <td>{{ inscrito.turno }}</td>
+                        <td>{{ inscrito.seminario }}</td>
+                        <td>
+                            <a href="{{ url_for('editar', inscrito_id=loop.index0) }}">Editar</a>
+                            <a href="{{ url_for('eliminar', inscrito_id=loop.index0) }}" onclick="return confirm('¿Estás seguro de que deseas eliminar este inscrito?');">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="6">No hay inscritos.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</body>
+</html>

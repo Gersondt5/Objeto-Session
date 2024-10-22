@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Inscrito</title>
+</head>
+<body>
+    <h1>Editar Inscrito</h1>
+    
+    <form method="POST">
+        <label for="fecha">Fecha:</label>
+        <input type="date" name="fecha" value="{{ inscrito.fecha }}" required><br><br>
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" value="{{ inscrito.nombre }}" required><br><br>
+
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" name="apellidos" value="{{ inscrito.apellidos }}" required><br><br>
+
+        <label for="turno">Turno:</label>
+        <select name="turno" required>
+            <option value="Mañana" {% if inscrito.turno == 'Mañana' %}selected{% endif %}>Mañana</option>
+            <option value="Tarde" {% if inscrito.turno == 'Tarde' %}selected{% endif %}>Tarde</option>
+            <option value="Noche" {% if inscrito.turno == 'Noche' %}selected{% endif %}>Noche</option>
+        </select><br><br>
+
+        <label for="seminario">Seminarios disponibles:</label><br>
+        <input type="radio" name="seminario" value="Inteligencia Artificial" {% if inscrito.seminario == 'Inteligencia Artificial' %}checked{% endif %} required> Inteligencia Artificial<br>
+        <input type="radio" name="seminario" value="Machine Learning" {% if inscrito.seminario == 'Machine Learning' %}checked{% endif %} required> Machine Learning<br>
+        <input type="radio" name="seminario" value="Simulación con Arena" {% if inscrito.seminario == 'Simulación con Arena' %}checked{% endif %} required> Simulación con Arena<br>
+        <input type="radio" name="seminario" value="Robótica Educativa" {% if inscrito.seminario == 'Robótica Educativa' %}checked{% endif %} required> Robótica Educativa<br><br>
+
+        <input type="submit" value="Actualizar">
+    </form>
+
+    <a href="{{ url_for('index') }}"><button>Volver a la lista</button></a>
+</body>
+</html>
